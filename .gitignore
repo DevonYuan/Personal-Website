@@ -1,15 +1,13 @@
-# v0 sandbox internal files
-__v0_runtime_loader.js
-__v0_devtools.tsx
-__v0_jsx-dev-runtime.ts
-.snowflake/
-.v0-trash/
-.vercel/
+# Node modules
+node_modules/
 
-# Environment variables
-.env*.local
+# Skills 
+.agents/
 
-# Common ignores
-node_modules
-dist/
-.DS_Store
+# Unnecessary parts of graphify-out/
+graphify-out/cache/
+graphify-out/cost.json
+graphify-out/.graphify_root
+graphify-out/.graphify_python
+graphify-out/.graphify_labels.json
+graphify-out/manifest.json
