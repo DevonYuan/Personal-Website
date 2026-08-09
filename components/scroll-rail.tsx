@@ -12,70 +12,63 @@ const SECTIONS = [
 ]
 
 export function ScrollRail() {
-  const [active, setActive] = useState('home')
-  const [progress, setProgress] = useState(0)
+  const [active, setActive] = useState<string>('home')
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      setProgress(max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0)
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible) setActive(visible.target.id)
-      },
-      { rootMargin: '-35% 0px -55% 0px', threshold: [0.1, 0.35, 0.7] },
-    )
-
-    SECTIONS.forEach(({ id }) => {
-      const section = document.getElementById(id)
-      if (section) observer.observe(section)
-    })
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.3)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const sections = SECTIONS.map((s) => document.getElementById(s.id)).filter((el): el is HTMLElement => el !== null)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id)
+          }
+        }
+      },
+      { rootMargin: '-50% 0px -50% 0px' },
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
+
+  if (!visible) return null
+
   return (
-    <aside className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 md:block" aria-label="Page sections">
-      <div className="flex items-center gap-3">
-        <div className="relative h-56 w-px bg-border/70">
-          <div
-            className="absolute left-0 top-0 w-px bg-accent transition-[height] duration-200"
-            style={{ height: `${Math.max(6, progress)}%` }}
+    <nav
+      aria-label="Page sections"
+      className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end gap-2 sm:gap-3"
+    >
+      {SECTIONS.map((section) => (
+        <a
+          key={section.id}
+          href={`#${section.id}`}
+          className={cn(
+            'group flex items-center gap-2 px-2 py-1.5 transition-all duration-200',
+            active === section.id
+              ? 'opacity-100'
+              : 'opacity-0 sm:opacity-60 group-hover:opacity-100',
+          )}
+        >
+          <span
+            className={cn(
+              'h-1.5 w-1.5 rounded-full transition-all duration-200',
+              active === section.id
+                ? 'bg-primary scale-150'
+                : 'bg-border hover:bg-primary/50',
+            )}
           />
-          <div
-            className="absolute -left-1.5 h-3 w-3 rounded-full border-2 border-background bg-accent shadow-[0_0_0_3px_oklch(0.65_0.18_265/0.18)] transition-[top] duration-200"
-            style={{ top: `calc(${Math.min(100, progress)}% - 6px)` }}
-            aria-hidden="true"
-          />
-        </div>
-        <nav className="flex flex-col gap-4">
-          {SECTIONS.map((section) => (
-            <a
-              key={section.id}
-              href={`#${section.id}`}
-              aria-label={`Go to ${section.label}`}
-              className={cn(
-                'font-mono text-[10px] uppercase tracking-[0.18em] transition-colors',
-                active === section.id ? 'text-foreground' : 'text-muted-foreground/55 hover:text-muted-foreground',
-              )}
-            >
-              {section.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </aside>
+          <span className="font-mono text-xs font-medium text-foreground whitespace-nowrap">
+            {section.label}
+          </span>
+        </a>
+      ))}
+    </nav>
   )
 }

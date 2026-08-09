@@ -1,0 +1,92 @@
+/* Hallmark · macrostructure: Long Document · tone: editorial · anchor hue: warm amber ~30° */
+/* Newsprint theme tokens — dark editorial palette */
+
+:root {
+  /* Typography */
+  --font-sans: var(--font-geist-sans), 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace;
+  --font-display: 'Instrument Serif', Georgia, Cambria, 'Times New Roman', serif;
+
+  /* Type scale */
+  --text-display: clamp(3.5rem, 8vw, 6.5rem);
+  --text-display-s: clamp(2.75rem, 6vw, 5rem);
+  --text-4xl: clamp(2.25rem, 4.5vw, 3.5rem);
+  --text-3xl: clamp(1.875rem, 3.5vw, 2.75rem);
+  --text-2xl: clamp(1.5rem, 2.5vw, 2rem);
+  --text-xl: clamp(1.25rem, 2vw, 1.5rem);
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+
+  /* Spacing — 4pt scale */
+  --space-4xs: 0.125rem;
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.375rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3.25rem;
+  --space-2xl: 5.25rem;
+  --space-3xl: 8.5rem;
+  --space-4xl: 13.75rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 0.68, 0.19);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+  --dur-slower: 600ms;
+
+  /* Colours — Newsprint dark (OKLCH) */
+  --color-background: oklch(0.11 0.008 45);
+  --color-foreground: oklch(0.96 0.008 45);
+  --color-card: oklch(0.15 0.01 45);
+  --color-card-foreground: oklch(0.96 0.008 45);
+  --color-popover: oklch(0.15 0.01 45);
+  --color-popover-foreground: oklch(0.96 0.008 45);
+  --color-primary: oklch(0.72 0.16 38);
+  --color-primary-foreground: oklch(0.11 0.008 45);
+  --color-secondary: oklch(0.18 0.012 45);
+  --color-secondary-foreground: oklch(0.92 0.008 45);
+  --color-muted: oklch(0.18 0.012 45);
+  --color-muted-foreground: oklch(0.62 0.015 45);
+  --color-accent: oklch(0.72 0.16 38);
+  --color-accent-foreground: oklch(0.11 0.008 45);
+  --color-destructive: oklch(0.65 0.22 25);
+  --color-destructive-foreground: oklch(0.96 0.008 45);
+  --color-border: oklch(0.24 0.015 45);
+  --color-input: oklch(0.24 0.015 45);
+  --color-ring: oklch(0.72 0.16 38);
+  --color-focus: oklch(0.72 0.16 38);
+
+  /* Chart tokens */
+  --color-chart-1: oklch(0.72 0.16 38);
+  --color-chart-2: oklch(0.68 0.08 190);
+  --color-chart-3: oklch(0.58 0.12 140);
+  --color-chart-4: oklch(0.52 0.1 70);
+  --color-chart-5: oklch(0.42 0.08 30);
+
+  /* Radius */
+  --radius: 0.375rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Sidebar (shadcn compat) */
+  --color-sidebar: oklch(0.09 0.008 45);
+  --color-sidebar-foreground: oklch(0.96 0.008 45);
+  --color-sidebar-primary: oklch(0.72 0.16 38);
+  --color-sidebar-primary-foreground: oklch(0.11 0.008 45);
+  --color-sidebar-accent: oklch(0.18 0.012 45);
+  --color-sidebar-accent-foreground: oklch(0.92 0.008 45);
+  --color-sidebar-border: oklch(0.24 0.015 45);
+  --color-sidebar-ring: oklch(0.72 0.16 38);
+}

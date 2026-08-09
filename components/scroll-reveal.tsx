@@ -25,7 +25,7 @@ export function ScrollReveal({
   return (
     <div
       ref={ref}
-      className={cn('scroll-reveal', `scroll-reveal-${variant}`, isVisible && 'is-visible', className)}
+      className={`scroll-reveal scroll-reveal-${variant} ${isVisible ? 'is-visible' : ''} ${className ? cn(className) : ''}`}
       style={{ ...style, transitionDelay: `${delay}ms` }}
       {...props}
     >

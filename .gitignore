@@ -3,6 +3,10 @@ node_modules/
 
 # Skills 
 .agents/
+.claude/
+
+# Build
+dist/
 
 # Unnecessary parts of graphify-out/
 graphify-out/cache/

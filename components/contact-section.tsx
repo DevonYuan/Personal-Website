@@ -1,89 +1,92 @@
-import { Mail, Phone } from 'lucide-react'
-import { SectionHeading } from '@/components/projects-section'
+'use client'
 
-const CONTACTS = [
-  {
-    label: 'Email',
-    value: 'devon.yuan@outlook.com',
-    href: 'mailto:devon.yuan@outlook.com',
-    icon: 'mail' as const,
-  },
-  {
-    label: 'Phone',
-    value: '236-458-2221',
-    href: 'tel:+12364582221',
-    icon: 'phone' as const,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'devon-yuan-361575340',
-    href: 'https://www.linkedin.com/in/devon-yuan-361575340/',
-    icon: 'linkedin' as const,
-  },
-  {
-    label: 'Discord',
-    value: 'devon7021o_o',
-    href: undefined,
-    icon: 'discord' as const,
-  },
-]
+import { ScrollReveal } from '@/components/scroll-reveal'
+import { Mail, MessageSquare, Link2, Phone } from 'lucide-react'
 
-function ContactIcon({ icon }: { icon: (typeof CONTACTS)[number]['icon'] }) {
-  if (icon === 'mail') return <Mail className="h-5 w-5 text-accent" aria-hidden="true" />
-  if (icon === 'phone') return <Phone className="h-5 w-5 text-accent" aria-hidden="true" />
-  const src = icon === 'linkedin' ? '/icons/linkedin.svg' : '/icons/discord.svg'
-  return (
-    <span className="relative block h-5 w-5">
-      <img src={src} alt="" className="h-full w-full object-contain" aria-hidden="true" />
-    </span>
-  )
+type ContactItem = {
+  label: string
+  value: string
+  href: string
+  icon: React.ReactNode
 }
 
 export function ContactSection() {
+  const contacts: ContactItem[] = [
+    {
+      label: 'Email',
+      value: 'devon.yuan@outlook.com',
+      href: 'mailto:devon.yuan@outlook.com',
+      icon: <Mail className="w-5 h-5" />,
+    },
+    {
+      label: 'Discord',
+      value: 'devonyuan',
+      href: 'https://discord.com/users/devonyuan',
+      icon: <MessageSquare className="w-5 h-5" />,
+    },
+    {
+      label: 'LinkedIn',
+      value: 'devon-yuan-361575340',
+      href: 'https://linkedin.com/in/devon-yuan-361575340',
+      icon: <Link2 className="w-5 h-5" />,
+    },
+    {
+      label: 'Phone',
+      value: '+1 (555) 123-4567',
+      href: 'tel:+15551234567',
+      icon: <Phone className="w-5 h-5" />,
+    },
+  ]
+
   return (
-    <section id="contact" className="border-t border-border py-20 sm:py-28">
+    <section id="contact" className="py-2xl">
       <div className="mx-auto max-w-5xl px-6">
-        <SectionHeading index="04" title="Contact" />
-        <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-          Have a project in mind, or want to test OmniDrive? Reach out through any of these.
-        </p>
+        <ScrollReveal variant="wipe">
+          <div className="flex items-baseline gap-4">
+            <span className="font-mono text-xs font-semibold tracking-widest text-primary">04</span>
+            <h2 className="font-display text-4xl font-medium tracking-tight text-foreground sm:text-5xl">Contact</h2>
+          </div>
+        </ScrollReveal>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {CONTACTS.map((contact) => (
-            <li key={contact.label}>
-              {contact.href ? (
-                <a
-                  href={contact.href}
-                  className="flex items-center gap-4 rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent/50 hover:bg-secondary"
-                  target={contact.href.startsWith('http') ? '_blank' : undefined}
-                  rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >
-                  <ContactIcon icon={contact.icon} />
-                  <span>
-                    <span className="block font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      {contact.label}
-                    </span>
-                    <span className="block text-sm font-medium text-foreground">{contact.value}</span>
-                  </span>
-                </a>
-              ) : (
-                <div className="flex items-center gap-4 rounded-lg border border-border bg-card p-5">
-                  <ContactIcon icon={contact.icon} />
-                  <span>
-                    <span className="block font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      {contact.label}
-                    </span>
-                    <span className="block text-sm font-medium text-foreground">{contact.value}</span>
-                  </span>
+        <div className="mt-6 grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-12 items-start">
+          {/* Editorial lead */}
+          <ScrollReveal variant="rise">
+            <div className="prose-measure">
+              <p className="text-lg leading-8 text-muted-foreground">
+                I read every message. Whether it's a project inquiry, a cubing tip, or a coffee
+                recommendation — I'll respond.
+              </p>
+              <p className="mt-4 text-base leading-7 text-muted-foreground">
+                Currently open to: full-time roles, freelance projects, and interesting problems
+                worth solving.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Contact info cards — clean, editorial layout */}
+          <ScrollReveal variant="slide" delay={150}>
+            <dl className="space-y-3">
+              {contacts.map((contact, index) => (
+                <div key={contact.label} className="group flex items-center gap-4 rounded-lg border border-border/40 bg-card/50 p-4 transition-colors hover:border-border/80 hover:bg-card">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-md bg-primary/10 text-primary" aria-hidden="true">
+                    {contact.icon}
+                  </div>
+                  <dt className="font-mono text-xs uppercase tracking-widest text-primary min-w-[80px]">
+                    {contact.label}
+                  </dt>
+                  <dd className="flex-1 min-w-0">
+                    <a
+                      href={contact.href}
+                      className="text-base font-medium text-foreground transition-colors hover:text-primary group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-ring rounded"
+                    >
+                      {contact.value}
+                    </a>
+                  </dd>
                 </div>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-12 text-center font-mono text-xs text-muted-foreground">
-          Built with React, Vite, Tailwind CSS &amp; React Three Fiber.
-        </p>
+              ))}
+            </dl>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   )

@@ -1,64 +1,46 @@
-import { SectionHeading } from '@/components/projects-section'
 import { ScrollReveal } from '@/components/scroll-reveal'
 
-const SKILL_GROUPS = [
-  {
-    category: 'Languages',
-    items: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
-  },
-  {
-    category: 'Backend & APIs',
-    items: ['FastAPI', 'REST APIs', 'JWT Auth', 'SQLAlchemy', 'Alembic', 'Pandas'],
-  },
-  {
-    category: 'Frontend',
-    items: ['React', 'Vite', 'Tailwind CSS', 'React Three Fiber'],
-  },
-  {
-    category: 'Data & Infra',
-    items: ['PostgreSQL', 'SQLite', 'Supabase', 'Docker', 'Railway', 'Render'],
-  },
-  {
-    category: 'Platform & Tooling',
-    items: ['Electron', 'Google Drive API', 'Microsoft Graph API', 'Git'],
-  },
-  {
-    category: 'AI',
-    items: ['Gemini API', 'PandasAI', 'Prompt design', 'Ollama (local dev)'],
-  },
+const SKILLS = [
+  { category: 'Languages', items: ['TypeScript', 'Python', 'Rust', 'Go', 'SQL'] },
+  { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind', 'Three.js', 'Vite'] },
+  { category: 'Backend', items: ['FastAPI', 'Node.js', 'PostgreSQL', 'SQLite', 'Docker'] },
+  { category: 'AI / Data', items: ['Pandas', 'Gemini API', 'PandasAI', 'Embeddings', 'RAG'] },
+  { category: 'Desktop', items: ['Electron', 'Tauri', 'SQLite', 'Native APIs'] },
+  { category: 'DevOps', items: ['Railway', 'Render', 'GitHub Actions', 'Supabase', 'Vercel'] },
 ]
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="border-t border-border bg-secondary/40 py-20 sm:py-28">
+    <section id="skills" className="py-3xl">
       <div className="mx-auto max-w-5xl px-6">
-        <ScrollReveal variant="rise">
-          <SectionHeading index="02" title="Technical skills" />
-          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-            The tools I reach for when a project needs a clear path from idea to shipped product.
-          </p>
+        <ScrollReveal variant="wipe">
+          <div className="flex items-baseline gap-4">
+            <span className="font-mono text-xs font-semibold tracking-widest text-primary">02</span>
+            <h2 className="font-display text-4xl font-medium tracking-tight text-foreground sm:text-5xl">Skills</h2>
+          </div>
         </ScrollReveal>
 
-        <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {SKILL_GROUPS.map((group, index) => (
-            <ScrollReveal key={group.category} variant="scale" delay={index * 70}>
-            <div className="bg-card p-6">
-              <h3 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-                {group.category}
-              </h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-full border border-border bg-background px-2.5 py-1 text-xs text-foreground"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            </ScrollReveal>
-          ))}
+        <div className="mt-14">
+          <ScrollReveal variant="rise" delay={100}>
+            {/* F3 Tabular Spec Sheet — editorial, dense, scannable */}
+            <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {SKILLS.map((skill, index) => (
+                <div key={skill.category} className="col-span-1 rounded-lg border border-border/40 bg-card/50 p-6 transition-colors hover:border-primary/40">
+                  <dt className="font-mono text-xs uppercase tracking-widest text-primary">{skill.category}</dt>
+                  <dd className="mt-3 flex flex-wrap gap-1.5">
+                    {skill.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-md bg-secondary px-2.5 py-1 text-sm font-medium text-foreground"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </ScrollReveal>
         </div>
       </div>
     </section>

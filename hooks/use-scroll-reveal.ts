@@ -31,7 +31,7 @@ export function useScrollReveal<T extends HTMLElement>() {
           observer.disconnect()
         }
       },
-      { threshold: 0.01, rootMargin: '0px 0px 0px 0px' },
+      { threshold: 0, rootMargin: '0px 0px 0px 0px' },
     )
 
     observer.observe(element)
