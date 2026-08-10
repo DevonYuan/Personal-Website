@@ -1,10 +1,10 @@
 import { ScrollReveal } from '@/components/scroll-reveal'
 
 const HOBBIES = [
-  { name: 'Speedcubing', detail: 'Sub-15 3×3, learning 4×4 and OH. The algorithmic rhythm teaches patience.', icon: '🧊' },
-  { name: 'Mechanical keyboards', detail: 'Building custom keebs — switches, stabs, PCB design. Tangible craft.', icon: '⌨️' },
-  { name: 'Coffee', detail: 'Light roasts, V60, weighing every gram. Precision as ritual.', icon: '☕' },
-  { name: 'Reading', detail: 'Systems, typography, sci-fi, indie web. Always a book nearby.', icon: '📖' },
+  { name: 'Speedcubing', detail: 'Currently sub-10 seconds on 3x3.', icon: '🧊' },
+  { name: 'Running', detail: '5K average time: Just under 20 minutes. Personal record is 19:10.', icon: '⌨️' },
+  { name: 'Gaming', detail: 'Currently playing: Street Fighter 6, Dying Light: The Beast, and Ghost of Yotei.', icon: '☕' },
+  { name: 'Hiking', detail: 'I am extremely grateful to live in a neighborhood that is next to a forest trail, which goes along the Coquitlam river', icon: '📖' },
 ]
 
 export function LifeSection() {
@@ -22,13 +22,10 @@ export function LifeSection() {
           {/* Editorial column — T3 Single Huge Quote as lead */}
           <ScrollReveal variant="rise">
             <blockquote className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-foreground leading-[1.15] prose-measure">
-              &ldquo;The best code is the code you don't have to write — because the tool already exists.&rdquo;
+              Things I do outside of building projects.
             </blockquote>
             <p className="mt-6 text-base leading-8 text-muted-foreground prose-measure">
-              Outside the terminal, I'm chasing sub-15 solves, lubricating stabilizers, dialing in a V60 pour-over,
-              or rereading <cite className="font-sans italic not-italic">The Design of Everyday Things</cite> for the
-              fourth time. These aren't hobbies — they're the same craft: constraints, iteration, and the satisfaction
-              of a clean solution.
+              My hobbies include speedcubing, running, gaming, and hiking. I enjoy the adrenaline rush that come with challenging myself to run a 5K or solve a cube as fast as possible, but hiking and gaming help me unwind. 
             </p>
           </ScrollReveal>
 

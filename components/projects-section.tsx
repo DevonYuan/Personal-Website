@@ -15,19 +15,19 @@ const PROJECTS: Project[] = [
     name: 'OmniDrive',
     tagline: 'Unified cloud storage pool',
     description:
-      'A local desktop app that merges Google Drive and Microsoft OneDrive into one seamless storage pool — presenting combined capacity and handling distribution and retrieval across both providers automatically. Fully local and single-user: no login, no accounts, no remote database.',
+      'A desktop app that merges Google Drive and Microsoft OneDrive into one seamless storage pool. It is fully local and single-user: no login, no accounts, no remote database. Due to the constraints of Google Cloud, you must contact me to be able to use the effectively.',
     image: '/projects/omnidrive.png',
     stack: ['FastAPI', 'Google Drive API', 'Microsoft Graph', 'SQLite', 'SQLAlchemy', 'React', 'Electron'],
-    note: 'Currently in closed testing — reach out if you’d like access.',
+    note: 'GitHub: https://github.com/DevonYuan/Unified-Storage-Pooler',
   },
   {
     name: 'DataLens AI',
     tagline: 'AI-powered data analysis chat',
     description:
-      'A full-stack app for chatting with your datasets. Rather than letting a model answer questions directly, it generates and runs Pandas code to analyze the data — hedging against hallucination while still feeling conversational.',
+      'My first full-stack app, where I learned about prompt engineering. Rather than letting a model answer questions directly, it generates and runs Pandas code to analyze the data to hedge againt hallucination and manually calculating values.',
     image: '/projects/datalens.png',
-    stack: ['FastAPI', 'Pandas', 'PandasAI', 'Gemini API', 'Supabase', 'React + Vite', 'Docker'],
-    note: 'Deployed on Railway (backend) and Render (frontend).',
+    stack: ['FastAPI', 'Pandas', 'PandasAI', 'Gemini API', 'Supabase', 'React + Vite', 'Ollama'],
+    note: 'GitHub: https://github.com/DevonYuan/Unified-Storage-Pooler',
   },
 ]
 

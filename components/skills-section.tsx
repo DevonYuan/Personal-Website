@@ -1,11 +1,11 @@
 import { ScrollReveal } from '@/components/scroll-reveal'
 
 const SKILLS = [
-  { category: 'Languages', items: ['TypeScript', 'Python', 'Rust', 'Go', 'SQL'] },
-  { category: 'Frontend', items: ['React', 'Next.js', 'Tailwind', 'Three.js', 'Vite'] },
-  { category: 'Backend', items: ['FastAPI', 'Node.js', 'PostgreSQL', 'SQLite', 'Docker'] },
-  { category: 'AI / Data', items: ['Pandas', 'Gemini API', 'PandasAI', 'Embeddings', 'RAG'] },
-  { category: 'Desktop', items: ['Electron', 'Tauri', 'SQLite', 'Native APIs'] },
+  { category: 'Languages', items: ['Java', 'Python', 'JavaScript', 'C++ (Elementary)', 'SQL', 'R'] },
+  { category: 'Frontend', items: ['React', 'CSS', '3 Fiber', 'Vite'] },
+  { category: 'Backend', items: ['FastAPI', 'Node.js'] },
+  { category: 'AI / Data', items: ['Pandas', 'Gemini API', 'PandasAI', 'PostgreSQL', 'SQLite', 'Ollama', 'Tidyverse (R)'] },
+  { category: 'Desktop', items: ['Electron', 'Tauri', 'SQLite', 'Docker'] },
   { category: 'DevOps', items: ['Railway', 'Render', 'GitHub Actions', 'Supabase', 'Vercel'] },
 ]
 

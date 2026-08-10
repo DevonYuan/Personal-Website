@@ -11,16 +11,14 @@ export function HeroSection() {
             <div className="prose-measure">
               {/* Eyebrow — editorial, not numbered */}
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
-                Full-stack developer · AI tools · Speedcuber
+                Hi, my name is 
               </p>
               <h1 className="mt-4 font-display text-5xl font-medium tracking-tight text-foreground leading-[1.05]">
-                Building practical tools<br />
-                <span className="font-sans font-normal text-primary">that people actually use</span>
+                Devon<br />
+                <span className="font-sans font-normal text-primary">Yuan </span>
               </h1>
               <p className="mt-6 text-lg leading-8 text-muted-foreground prose-measure">
-                I write code for local desktop utilities, cloud-deployed web platforms, and AI-powered
-                apps that hedge against hallucination. Currently merging cloud storage, chatting with
-                datasets, and solving cubes in under 15 seconds.
+                And I'm a 2nd year CS Student at UBC. I'm interested in building full-stack applications, exploring the latest in AI, and developing my software engineering skills.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <a
@@ -66,7 +64,7 @@ export function HeroSection() {
                 </div>
               </div>
               <p className="mt-4 text-center font-mono text-xs text-muted-foreground">
-                drag to rotate — solved in real life too (speedcuber)
+                drag to rotate — solved in real life too 
               </p>
             </div>
           </ScrollReveal>

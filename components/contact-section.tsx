@@ -20,8 +20,8 @@ export function ContactSection() {
     },
     {
       label: 'Discord',
-      value: 'devonyuan',
-      href: 'https://discord.com/users/devonyuan',
+      value: 'devon7021o_o',
+      href: 'https://discord.com/users/devon7021o_o',
       icon: <MessageSquare className="w-5 h-5" />,
     },
     {
@@ -32,8 +32,8 @@ export function ContactSection() {
     },
     {
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '+1 (236)-458-2221',
+      href: 'tel:+2364582221',
       icon: <Phone className="w-5 h-5" />,
     },
   ]
@@ -53,12 +53,10 @@ export function ContactSection() {
           <ScrollReveal variant="rise">
             <div className="prose-measure">
               <p className="text-lg leading-8 text-muted-foreground">
-                I read every message. Whether it's a project inquiry, a cubing tip, or a coffee
-                recommendation — I'll respond.
+                I'm available through several platforms, and I check all of these regularily. Please, feel free to reach out!
               </p>
               <p className="mt-4 text-base leading-7 text-muted-foreground">
-                Currently open to: full-time roles, freelance projects, and interesting problems
-                worth solving.
+                I'm currently seeking internships for the Summer Session of 2026 to 2027 school year, or Term 2 of the Winter Session. (Internships beginning any time through January 2027 through April 2027)
               </p>
             </div>
           </ScrollReveal>
