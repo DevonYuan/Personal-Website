@@ -47,6 +47,14 @@ export default function Footer() {
           something{' '}
           <span className="font-serif normal-case italic text-neutral-400">iconic.</span>
         </motion.h2>
+        {/* Divider line */}
+        <motion.div
+          className="mt-8 w-16 h-px bg-neutral-700"
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
         <div className="mt-14 flex flex-wrap items-center gap-4">
           <button
             data-testid="footer-copy-email-btn"

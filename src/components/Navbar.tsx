@@ -8,7 +8,7 @@ interface NavLink {
 
 const LINKS: NavLink[] = [
   { label: 'Home', id: '#hero', testid: 'nav-link-home' },
-  { label: 'About', id: '#about', testid: 'nav-link-about' },
+  { label: 'Skills', id: '#about', testid: 'nav-link-skills' },
   { label: 'Projects', id: '#projects', testid: 'nav-link-projects' },
 ];
 

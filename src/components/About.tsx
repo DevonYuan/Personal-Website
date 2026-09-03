@@ -58,13 +58,13 @@ export default function About() {
           <motion.div
             key={category.title}
             data-testid={`about-skill-${category.title.toLowerCase().replace(/\s+/g, '-')}`}
-            className="border border-[#27272A] p-6 md:p-8"
+            className="border border-[#27272A] p-4 md:p-6"
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: i * 0.1 }}
           >
-            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-neutral-500 mb-4">
+            <h3 className="font-mono text-xs uppercase tracking-[0.15em] font-medium text-neutral-500 mb-3">
               /{category.title}
             </h3>
             <ul className="space-y-2">

@@ -91,6 +91,14 @@ export default function Projects() {
           2025 — 2026
         </span>
       </motion.h2>
+      {/* Divider line */}
+      <motion.div
+        className="mt-8 w-16 h-px bg-neutral-700"
+        initial={{ opacity: 0, scaleX: 0 }}
+        whileInView={{ opacity: 1, scaleX: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      />
       <div className="mt-16 md:mt-24">
         {PROJECTS.map((project, i) => (
           <motion.button
