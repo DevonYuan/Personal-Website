@@ -1,29 +1,26 @@
 import { motion } from 'framer-motion';
 
-interface Chapter {
-  number: string;
+interface SkillCategory {
   title: string;
-  description: string;
+  items: string[];
 }
 
-const CHAPTERS: Chapter[] = [
+const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    number: '01',
-    title: 'Engineering Philosophy',
-    description:
-      'Building at the intersection of high performance and tactile aesthetics. Code is written like architecture — structured to endure, detailed to delight.',
+    title: 'Databases',
+    items: [],
   },
   {
-    number: '02',
-    title: 'Stack & Craft',
-    description:
-      'React, WebGL / Three.js, Node.js, Python FastAPI and bespoke design systems. Minimal dependencies, maximum fidelity.',
+    title: 'Languages',
+    items: [],
   },
   {
-    number: '03',
-    title: 'Execution Standard',
-    description:
-      'Obsessed with 60fps micro-interactions, crisp typographic systems, sub-second loads and pixel-precise layout engines.',
+    title: 'Frameworks',
+    items: [],
+  },
+  {
+    title: 'Developer Tools & OS',
+    items: [],
   },
 ];
 
@@ -37,7 +34,7 @@ export default function About() {
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.7 }}
       >
-        01 — Manifesto
+        01 — Technical
       </motion.p>
       <motion.h2
         className="mt-4 font-display text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl"
@@ -46,51 +43,45 @@ export default function About() {
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.8, delay: 0.1 }}
       >
-        About <span className="font-serif normal-case italic text-neutral-400">the craft</span>
+        TECHNICAL <span className="font-serif normal-case italic text-neutral-400">skills</span>
       </motion.h2>
-      <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-[1fr_1.5fr] md:gap-12">
-        <motion.div
-          className="relative overflow-hidden border border-[#27272A]"
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9 }}
-        >
-          <img
-            data-testid="about-workspace-image"
-            src="https://images.unsplash.com/photo-1510519138101-570d1dca3d66?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHxfHxtaW5pbWFsaXN0JTIwZGFyayUyMGFyY2hpdGVjdHVyZSUyMHdvcmtzcGFjZSUyMGNvZGV8ZW58MHx8fHwxNzg4MzY5Nzk1fDA&ixlib=rb-4.1.0&q=85"
-            alt="Developer workspace"
-            className="h-full max-h-[560px] w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
-          />
-          <span className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-300">
-            FIG.01 — The Studio
-          </span>
-        </motion.div>
-        <div>
-          {CHAPTERS.map((chapter, i) => (
-            <motion.div
-              key={chapter.number}
-              data-testid={`about-chapter-${chapter.number}`}
-              className="grid grid-cols-[auto_1fr] gap-6 border-t border-[#27272A] py-10 md:gap-12"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, delay: i * 0.12 }}
-            >
-              <span className="font-mono text-sm text-neutral-600">
-                /<span>{chapter.number}</span>
-              </span>
-              <div>
-                <h3 className="font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-                  {chapter.title}
-                </h3>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-400 md:text-base">
-                  {chapter.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      {/* Divider line */}
+      <motion.div
+        className="mt-8 w-16 h-px bg-neutral-700"
+        initial={{ opacity: 0, scaleX: 0 }}
+        whileInView={{ opacity: 1, scaleX: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      />
+      <div className="mt-16 grid gap-8 md:mt-24 md:grid-cols-2 lg:grid-cols-4">
+        {SKILL_CATEGORIES.map((category, i) => (
+          <motion.div
+            key={category.title}
+            data-testid={`about-skill-${category.title.toLowerCase().replace(/\s+/g, '-')}`}
+            className="border border-[#27272A] p-6 md:p-8"
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, delay: i * 0.1 }}
+          >
+            <h3 className="font-mono text-xs uppercase tracking-[0.25em] text-neutral-500 mb-4">
+              /{category.title}
+            </h3>
+            <ul className="space-y-2">
+              {category.items.length > 0 ? (
+                category.items.map((item) => (
+                  <li key={item} className="font-mono text-sm text-neutral-400">
+                    {item}
+                  </li>
+                ))
+              ) : (
+                <li className="font-mono text-sm text-neutral-600 italic">
+                  —
+                </li>
+              )}
+            </ul>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
