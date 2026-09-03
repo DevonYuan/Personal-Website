@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
+import ScrollProgressBar from './components/ScrollProgressBar';
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
         <Projects />
       </main>
       <Footer />
+      <ScrollProgressBar />
     </div>
   );
 }
