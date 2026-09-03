@@ -254,7 +254,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.1 }}
           >
-            developer — building precise, tactile systems for the web
+            BSc. Major in Computer Science @ UBC
           </motion.p>
         </div>
       </div>
@@ -266,7 +266,7 @@ export default function Hero() {
         Portfolio / V.{new Date().getFullYear()}
       </Annot>
       <Annot testid="hero-annot-coords" className="right-6 top-24 text-right md:right-10 md:top-28" delay={1}>
-        37.7749°N — 122.4194°W
+        49.2748°N — 122.7987°W
       </Annot>
       <Annot testid="hero-annot-system" className="right-6 top-10 md:right-10 md:top-12 text-right" delay={0.85}>
         <SystemStatus />
