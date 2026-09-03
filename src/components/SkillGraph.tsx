@@ -31,13 +31,15 @@ const CATEGORY_COLORS: Record<string, string> = {
   Languages: '#F4A261',
   Frameworks: '#457B9D',
   'Developer Tools & OS': '#2A9D8F',
+  Cloud: '#7C3AED',
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
-  Databases: '🗄',
-  Languages: '💻',
-  Frameworks: '⚡',
-  'Developer Tools & OS': '🛠',
+  Databases: '',
+  Languages: '',
+  Frameworks: '',
+  'Developer Tools & OS': '',
+  Cloud: '',
 };
 
 export function SkillGraph({
@@ -53,17 +55,18 @@ export function SkillGraph({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [links, setLinks] = useState<Link[]>([]);
+  const simNodesRef = useRef<Node[]>([]);
+  const simLinksRef = useRef<Link[]>([]);
+  const initializedRef = useRef(false);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
-  // Build nodes and links from categories
-  const graphData = useMemo(() => {
-    const newNodes: Node[] = [];
-    const newLinks: Link[] = [];
-
+  // Build initial graph structure
+  const graphStructure = useMemo(() => {
     const centerX = width / 2;
     const centerY = height / 2;
+    const orbitRadius = Math.min(width, height) * 0.35;
+    const newNodes: Node[] = [];
+    const newLinks: Link[] = [];
 
     // Core node
     newNodes.push({
@@ -78,10 +81,8 @@ export function SkillGraph({
       color: '#F5F5F7',
     });
 
-    // Category nodes in a circle around core
     const categoryTitles = categories.map(c => c.title);
     const categoryCount = categoryTitles.length;
-    const orbitRadius = Math.min(width, height) * 0.28;
 
     categoryTitles.forEach((title, i) => {
       const angle = (i / categoryCount) * Math.PI * 2 - Math.PI / 2;
@@ -107,7 +108,6 @@ export function SkillGraph({
         strength: 0.8,
       });
 
-      // Skill nodes for each item in category
       const category = categories.find(c => c.title === title);
       if (category) {
         category.items.forEach((item, j) => {
@@ -141,13 +141,14 @@ export function SkillGraph({
     return { nodes: newNodes, links: newLinks };
   }, [categories, width, height]);
 
-  // Initialize nodes/links
+  // Initialize simulation refs once
   useEffect(() => {
-    setNodes(graphData.nodes);
-    setLinks(graphData.links);
-  }, [graphData]);
+    const structure = graphStructure;
+    simNodesRef.current = structure.nodes.map(n => ({ ...n }));
+    simLinksRef.current = structure.links;
+  }, [graphStructure]);
 
-  // Force simulation
+  // Force simulation - runs continuously without React re-renders
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -163,104 +164,36 @@ export function SkillGraph({
     canvas.style.height = `${height}px`;
     ctx.scale(dpr, dpr);
 
-    let simulationNodes = nodes.map(n => ({ ...n }));
-    let simulationLinks = [...links];
-
     // Simulation parameters
-    const k = 0.02; // Spring constant
-    const repulsion = 800;
-    const damping = 0.85;
-    const centerForce = 0.01;
+    const k = 0.015; // Spring constant (softer)
+    const repulsion = 600;
+    const damping = 0.88;
+    const centerForce = 0.008;
 
-    // Warm-up: run simulation headless for 400 frames to settle nodes
-    for (let w = 0; w < 400; w++) {
-      simulationNodes.forEach(node => {
-        if (node.type === 'category') {
-          const centerX = width / 2;
-          const centerY = height / 2;
-          const dx = centerX - node.x;
-          const dy = centerY - node.y;
-          node.vx += dx * centerForce;
-          node.vy += dy * centerForce;
-        }
-
-        simulationNodes.forEach(other => {
-          if (node === other) return;
-          const dx = node.x - other.x;
-          const dy = node.y - other.y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const force = repulsion / (dist * dist);
-          node.vx += (dx / dist) * force;
-          node.vy += (dy / dist) * force;
-        });
-
-        simulationLinks.forEach(link => {
-          const source = simulationNodes.find(n => n.id === link.source);
-          const target = simulationNodes.find(n => n.id === link.target);
-          if (!source || !target) return;
-
-          const dx = target.x - source.x;
-          const dy = target.y - source.y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const targetDist = link.source === 'core' ? 160 : 85;
-          const force = k * (dist - targetDist);
-          const fx = (dx / dist) * force * link.strength;
-          const fy = (dy / dist) * force * link.strength;
-
-          if (link.source === 'core' || link.target === 'core') {
-            if (source.id !== 'core') {
-              source.vx += fx;
-              source.vy += fy;
-            }
-            if (target.id !== 'core') {
-              target.vx -= fx;
-              target.vy -= fy;
-            }
-          } else {
-            source.vx += fx;
-            source.vy += fy;
-            target.vx -= fx;
-            target.vy -= fy;
-          }
-        });
-      });
-
-      simulationNodes.forEach(node => {
-        if (node.type !== 'core') {
-          node.vx *= damping;
-          node.vy *= damping;
-          node.x += node.vx;
-          node.y += node.vy;
-        }
-      });
-
-      const coreNode = simulationNodes.find(n => n.id === 'core');
-      if (coreNode) {
-        coreNode.x = width / 2;
-        coreNode.y = height / 2;
+    // Warm-up: run simulation headless to settle nodes (only on first init)
+    if (!initializedRef.current) {
+      for (let w = 0; w < 300; w++) {
+        stepSimulation();
       }
+      // Reset velocities after warm-up
+      simNodesRef.current.forEach(node => {
+        if (node.type !== 'core') {
+          node.vx = 0;
+          node.vy = 0;
+        }
+      });
+      initializedRef.current = true;
     }
 
-    // After warm-up, reset velocities to zero for smooth start
-    simulationNodes.forEach(node => {
-      if (node.type !== 'core') {
-        node.vx = 0;
-        node.vy = 0;
-      }
-    });
+    function stepSimulation() {
+      const nodes = simNodesRef.current;
+      const links = simLinksRef.current;
+      const centerX = width / 2;
+      const centerY = height / 2;
 
-    const tick = () => {
-      if (!ctx) return;
-
-      // Clear canvas
-      ctx.clearRect(0, 0, width, height);
-
-      // Apply forces
-      simulationNodes.forEach(node => {
+      nodes.forEach(node => {
         // Center attraction for category nodes
         if (node.type === 'category') {
-          const centerX = width / 2;
-          const centerY = height / 2;
           const dx = centerX - node.x;
           const dy = centerY - node.y;
           node.vx += dx * centerForce;
@@ -268,7 +201,7 @@ export function SkillGraph({
         }
 
         // Repulsion between all nodes
-        simulationNodes.forEach(other => {
+        nodes.forEach(other => {
           if (node === other) return;
           const dx = node.x - other.x;
           const dy = node.y - other.y;
@@ -279,9 +212,9 @@ export function SkillGraph({
         });
 
         // Spring forces for links
-        simulationLinks.forEach(link => {
-          const source = simulationNodes.find(n => n.id === link.source);
-          const target = simulationNodes.find(n => n.id === link.target);
+        links.forEach(link => {
+          const source = nodes.find(n => n.id === link.source);
+          const target = nodes.find(n => n.id === link.target);
           if (!source || !target) return;
 
           const dx = target.x - source.x;
@@ -293,7 +226,6 @@ export function SkillGraph({
           const fy = (dy / dist) * force * link.strength;
 
           if (link.source === 'core' || link.target === 'core') {
-            // Core is fixed
             if (source.id !== 'core') {
               source.vx += fx;
               source.vy += fy;
@@ -312,7 +244,7 @@ export function SkillGraph({
       });
 
       // Update positions
-      simulationNodes.forEach(node => {
+      nodes.forEach(node => {
         if (node.type !== 'core') {
           node.vx *= damping;
           node.vy *= damping;
@@ -322,16 +254,25 @@ export function SkillGraph({
       });
 
       // Keep core fixed
-      const coreNode = simulationNodes.find(n => n.id === 'core');
+      const coreNode = nodes.find(n => n.id === 'core');
       if (coreNode) {
-        coreNode.x = width / 2;
-        coreNode.y = height / 2;
+        coreNode.x = centerX;
+        coreNode.y = centerY;
       }
+    }
+
+    const tick = () => {
+      if (!ctx) return;
+
+      stepSimulation();
+
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
 
       // Draw links
-      simulationLinks.forEach(link => {
-        const source = simulationNodes.find(n => n.id === link.source);
-        const target = simulationNodes.find(n => n.id === link.target);
+      simLinksRef.current.forEach(link => {
+        const source = simNodesRef.current.find(n => n.id === link.source);
+        const target = simNodesRef.current.find(n => n.id === link.target);
         if (!source || !target) return;
 
         ctx.beginPath();
@@ -343,7 +284,7 @@ export function SkillGraph({
       });
 
       // Draw nodes
-      simulationNodes.forEach(node => {
+      simNodesRef.current.forEach(node => {
         const isHovered = hoveredNode === node.id;
         const pulse = isHovered ? 1 + Math.sin(Date.now() * 0.005) * 0.1 : 1;
         const r = node.radius * pulse;
@@ -439,17 +380,16 @@ export function SkillGraph({
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [nodes, links, hoveredNode, width, height]);
+  }, [width, height, hoveredNode]);
 
-  // Mouse interaction
+  // Mouse interaction - uses simulation refs for accurate hit testing
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     let found: string | null = null;
-    // Check from top to bottom (reverse for proper hit testing)
-    [...nodes].reverse().forEach(node => {
+    [...simNodesRef.current].reverse().forEach(node => {
       if (found) return;
       const dx = x - node.x;
       const dy = y - node.y;
@@ -460,14 +400,14 @@ export function SkillGraph({
     });
 
     setHoveredNode(found);
-  }, [nodes]);
+  }, []);
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    [...nodes].reverse().forEach(node => {
+    [...simNodesRef.current].reverse().forEach(node => {
       if (node.type === 'category') {
         const dx = x - node.x;
         const dy = y - node.y;
@@ -477,7 +417,7 @@ export function SkillGraph({
         }
       }
     });
-  }, [nodes, onCategoryClick]);
+  }, [onCategoryClick]);
 
   return (
     <div className="relative w-full h-full">
@@ -491,7 +431,6 @@ export function SkillGraph({
         className="w-full h-full block"
         style={{ cursor: hoveredNode ? 'pointer' : 'default' }}
       />
-
     </div>
   );
 }

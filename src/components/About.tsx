@@ -10,19 +10,23 @@ interface SkillCategory {
 const SKILL_CATEGORIES: SkillCategory[] = [
   {
     title: 'Databases',
-    items: ['PostgreSQL', 'Redis', 'MongoDB', 'SQLite'],
+    items: ['PostgreSQL', 'pgAdmin4', 'CockroachDB', 'SQLite'],
   },
   {
     title: 'Languages',
-    items: ['TypeScript', 'Python', 'Go', 'Rust', 'C++'],
+    items: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Python'],
   },
   {
     title: 'Frameworks',
-    items: ['React', 'Next.js', 'FastAPI', 'Tailwind', 'Three.js'],
+    items: ['React', 'Next.js', 'FastAPI', 'Tailwind', 'Three.js', 'chi', 'Electron'],
   },
   {
     title: 'Developer Tools & OS',
-    items: ['Linux', 'Docker', 'Git', 'Vim/Neovim', 'VS Code'],
+    items: ['Linux', 'MacOS', 'Windows', 'Git', 'Docker','VS Code'],
+  },
+  {
+    title: 'Cloud', 
+    items: ['GCP', 'Azure', 'Render', 'Vercel', 'Supabase'],
   },
 ];
 
@@ -89,7 +93,7 @@ export default function About() {
           <motion.div
             className="absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm"
             style={{
-              left: viewMode === 'graph' ? '0.5px' : 'calc(100% - 5.5px)',
+              left: viewMode === 'graph' ? '0.5px' : 'calc(100% - 20.5px)',
             }}
             transition={{ x: { duration: 0.2 } }}
           />
