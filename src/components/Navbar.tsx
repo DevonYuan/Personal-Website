@@ -33,7 +33,7 @@ export default function Navbar() {
           onClick={() => handleScroll('#hero')}
           className="font-mono text-xs tracking-[0.3em] text-neutral-300 transition-colors hover:text-white"
         >
-          YN — DEV.SYS
+          DY — DEVON7021
         </button>
         <div className="flex items-center gap-6 md:gap-10">
           {LINKS.map((link) => (

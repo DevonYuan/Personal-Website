@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const FACE = {
   px: '#E63946',
   nx: '#F4A261',
-  py: '#F1FAEE',
+  py: '#BBBBBB',  // Greyer white for better contrast against text
   ny: '#E9C46A',
   pz: '#457B9D',
   nz: '#2A9D8F',
@@ -13,6 +13,26 @@ const FACE = {
 const CORE = '#0d0d0d';
 const AXIS = ['x', 'y', 'z'] as const;
 const MOVE_DURATION = 0.38;
+
+interface CubePosition {
+  x: number;
+  y: number;
+  z: number;
+  rotationX: number;
+  rotationY: number;
+  rotationZ: number;
+  scale: number;
+}
+
+const DEFAULT_POSITION: CubePosition = {
+  x: 0,
+  y: 0,
+  z: 0,
+  rotationX: 0.45,
+  rotationY: 0.6,
+  rotationZ: 0,
+  scale: 0.92,
+};
 
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
@@ -98,17 +118,91 @@ const CubeGroup = () => {
   const pivot = useRef<THREE.Group>(null);
   const [cubies, setCubies] = useState(makeCubies());
   const [activeMove, setActiveMove] = useState<{ axis: number; layer: number; dir: number } | null>(null);
+  const [position, setPosition] = useState<CubePosition>(DEFAULT_POSITION);
   const moveRef = useRef<{ axis: number; layer: number; dir: number; start: number } | null>(null);
   const queueRef = useRef<Array<{ axis: number; layer: number; dir: number }>>([]);
   const historyRef = useRef<Array<{ axis: number; layer: number; dir: number }>>([]);
   const phaseRef = useRef({ mode: 'wait' as 'wait' | 'scrambling' | 'hold' | 'solving', until: 4 });
 
-  useFrame((state, delta) => {
+  // Keyboard controls for position adjustment
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const step = e.shiftKey ? 0.5 : 0.1;
+      const rotStep = e.shiftKey ? 0.1 : 0.02;
+      const scaleStep = e.shiftKey ? 0.1 : 0.02;
+      
+      setPosition(prev => {
+        const next = { ...prev };
+        switch (e.key.toLowerCase()) {
+          case 'arrowleft':
+          case 'a':
+            next.x -= step;
+            break;
+          case 'arrowright':
+          case 'd':
+            next.x += step;
+            break;
+          case 'arrowup':
+          case 'w':
+            if (e.shiftKey) next.rotationX -= rotStep;
+            else next.y += step;
+            break;
+          case 'arrowdown':
+          case 's':
+            if (e.shiftKey) next.rotationX += rotStep;
+            else next.y -= step;
+            break;
+          case 'q':
+            next.z += step;
+            break;
+          case 'e':
+            next.z -= step;
+            break;
+          case 'z':
+            next.rotationY -= rotStep;
+            break;
+          case 'x':
+            next.rotationY += rotStep;
+            break;
+          case 'c':
+            next.rotationZ -= rotStep;
+            break;
+          case 'v':
+            next.rotationZ += rotStep;
+            break;
+          case '=':
+          case '+':
+            next.scale = Math.min(next.scale + scaleStep, 3);
+            break;
+          case '-':
+          case '_':
+            next.scale = Math.max(next.scale - scaleStep, 0.1);
+            break;
+          case 'r':
+            return DEFAULT_POSITION;
+          case 'p':
+            console.log('Cube Position:', JSON.stringify(prev, null, 2));
+            break;
+        }
+        return next;
+      });
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  useFrame((state) => {
     const now = state.clock.getElapsedTime();
     if (group.current) {
-      group.current.rotation.y += delta * 0.22;
-      group.current.rotation.x = 0.45 + Math.sin(now * 0.25) * 0.12;
-      group.current.position.y = 0.55 + Math.sin(now * 0.5) * 0.15;
+      // Apply user-controlled position with steady rotation (no floating)
+      group.current.position.x = position.x;
+      group.current.position.y = position.y;
+      group.current.position.z = position.z;
+      group.current.rotation.x = position.rotationX;
+      group.current.rotation.y = position.rotationY + now * 0.4;  // Consistent, noticeable rotation
+      group.current.rotation.z = position.rotationZ;
+      group.current.scale.setScalar(position.scale);
     }
 
     const mv = moveRef.current;
@@ -164,7 +258,7 @@ const CubeGroup = () => {
   const inLayer = (c: typeof cubies[0]) => activeMove && c.pos[activeMove.axis] === activeMove.layer;
 
   return (
-    <group ref={group} rotation={[0.45, 0.6, 0]} scale={0.92}>
+    <group ref={group}>
       {cubies.filter((c) => !inLayer(c)).map((c) => <Cubie key={c.id} c={c} />)}
       <group ref={pivot}>
         {cubies.filter(inLayer).map((c) => <Cubie key={c.id} c={c} />)}
