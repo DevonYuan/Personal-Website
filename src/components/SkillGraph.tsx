@@ -64,7 +64,7 @@ export function SkillGraph({
   const graphStructure = useMemo(() => {
     const centerX = width / 2;
     const centerY = height / 2;
-    const orbitRadius = Math.min(width, height) * 0.35;
+    const orbitRadius = Math.min(width, height) * 0.3;
     const newNodes: Node[] = [];
     const newLinks: Link[] = [];
 
@@ -98,7 +98,7 @@ export function SkillGraph({
         y,
         vx: 0,
         vy: 0,
-        radius: 20,
+        radius: 16,
         color: CATEGORY_COLORS[title] || '#888',
       });
 
@@ -112,7 +112,7 @@ export function SkillGraph({
       if (category) {
         category.items.forEach((item, j) => {
           const skillAngle = angle + (j - (category.items.length - 1) / 2) * 0.4;
-          const skillRadius = orbitRadius + 85;
+          const skillRadius = orbitRadius + 110;
           const sx = centerX + Math.cos(skillAngle) * skillRadius;
           const sy = centerY + Math.sin(skillAngle) * skillRadius;
 
@@ -125,7 +125,7 @@ export function SkillGraph({
             y: sy,
             vx: 0,
             vy: 0,
-            radius: 12,
+            radius: 9,
             color: CATEGORY_COLORS[title] || '#888',
           });
 
@@ -168,7 +168,7 @@ export function SkillGraph({
     const k = 0.015; // Spring constant (softer)
     const repulsion = 600;
     const damping = 0.88;
-    const centerForce = 0.008;
+    const centerForce = 0.002; // Reduced to allow longer branches
 
     // Warm-up: run simulation headless to settle nodes (only on first init)
     if (!initializedRef.current) {
@@ -220,7 +220,7 @@ export function SkillGraph({
           const dx = target.x - source.x;
           const dy = target.y - source.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const targetDist = link.source === 'core' ? 160 : 85;
+          const targetDist = link.source === 'core' ? 260 : 130;
           const force = k * (dist - targetDist);
           const fx = (dx / dist) * force * link.strength;
           const fy = (dy / dist) * force * link.strength;
@@ -305,30 +305,14 @@ export function SkillGraph({
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
 
         if (node.type === 'core') {
-          // Core: gradient with chip pattern
-          const gradient = ctx.createRadialGradient(
-            node.x - r * 0.3, node.y - r * 0.3, 0,
-            node.x, node.y, r
-          );
-          gradient.addColorStop(0, '#FFFFFF');
-          gradient.addColorStop(0.5, '#BBBBBB');
-          gradient.addColorStop(1, '#888888');
-          ctx.fillStyle = gradient;
+          // Core: solid white circle with black text
+          ctx.fillStyle = '#FFFFFF';
           ctx.fill();
 
-          // Chip pattern lines
-          ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+          // Subtle border
+          ctx.strokeStyle = '#CCCCCC';
           ctx.lineWidth = 1;
-          for (let i = -1; i <= 1; i++) {
-            ctx.beginPath();
-            ctx.moveTo(node.x - r + 4, node.y + i * 6);
-            ctx.lineTo(node.x + r - 4, node.y + i * 6);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(node.x + i * 6, node.y - r + 4);
-            ctx.lineTo(node.x + i * 6, node.y + r - 4);
-            ctx.stroke();
-          }
+          ctx.stroke();
 
           // Core label
           ctx.fillStyle = '#080808';
@@ -356,7 +340,7 @@ export function SkillGraph({
 
           // Category label
           ctx.fillStyle = '#F5F5F7';
-          ctx.font = '500 10px "JetBrains Mono", monospace';
+          ctx.font = '500 12px "JetBrains Mono", monospace';
           ctx.fillText(node.label.toUpperCase(), node.x, node.y + r + 14);
         } else {
           // Skill: small circle

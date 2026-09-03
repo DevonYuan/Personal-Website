@@ -14,7 +14,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   },
   {
     title: 'Languages',
-    items: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Python'],
+    items: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C++', 'Java'],
   },
   {
     title: 'Frameworks',
@@ -106,17 +106,17 @@ export default function About() {
       {/* Graph View */}
       {viewMode === 'graph' && (
         <motion.div
-          className="mt-12 relative"
+          className="mt-20 relative"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ height: '60vh', minHeight: 400 }}
+          style={{ height: '90vh', minHeight: 600 }}
         >
           <SkillGraph
             categories={SKILL_CATEGORIES}
             onCategoryClick={handleCategoryClick}
             width={window.innerWidth > 1024 ? 1200 : window.innerWidth - 48}
-            height={Math.min(600, window.innerHeight * 0.6)}
+            height={Math.min(800, window.innerHeight * 0.85)}
           />
         </motion.div>
       )}
