@@ -169,6 +169,7 @@ export function SkillGraph({
     const repulsion = 600;
     const damping = 0.88;
     const centerForce = 0.002; // Reduced to allow longer branches
+    const boundaryPadding = 60; // Keep nodes away from edges
 
     // Warm-up: run simulation headless to settle nodes (only on first init)
     if (!initializedRef.current) {
@@ -241,6 +242,32 @@ export function SkillGraph({
             target.vy -= fy;
           }
         });
+      });
+
+      // Boundary constraint - keep nodes within canvas with padding
+      nodes.forEach(node => {
+        if (node.type !== 'core') {
+          const minX = boundaryPadding;
+          const maxX = width - boundaryPadding;
+          const minY = boundaryPadding;
+          const maxY = height - boundaryPadding;
+          
+          if (node.x < minX) {
+            node.x = minX;
+            node.vx = Math.abs(node.vx) * 0.5;
+          } else if (node.x > maxX) {
+            node.x = maxX;
+            node.vx = -Math.abs(node.vx) * 0.5;
+          }
+          
+          if (node.y < minY) {
+            node.y = minY;
+            node.vy = Math.abs(node.vy) * 0.5;
+          } else if (node.y > maxY) {
+            node.y = maxY;
+            node.vy = -Math.abs(node.vy) * 0.5;
+          }
+        }
       });
 
       // Update positions
@@ -404,7 +431,7 @@ export function SkillGraph({
   }, [onCategoryClick]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full overflow-visible">
       <canvas
         ref={canvasRef}
         width={width}

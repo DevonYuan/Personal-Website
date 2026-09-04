@@ -43,7 +43,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" data-testid="about-section" className="mx-auto max-w-[1600px] px-6 py-28 md:px-10 md:py-40">
+    <section id="about" data-testid="about-section" className="mx-auto max-w-[1600px] px-6 py-10 md:px-10 md:py-12 overflow-visible">
       <motion.p
         className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500"
         initial={{ opacity: 0, y: 16 }}
@@ -110,13 +110,13 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ height: '90vh', minHeight: 600 }}
+          style={{ height: '120vh', minHeight: 800 }}
         >
           <SkillGraph
             categories={SKILL_CATEGORIES}
             onCategoryClick={handleCategoryClick}
-            width={window.innerWidth > 1024 ? 1200 : window.innerWidth - 48}
-            height={Math.min(800, window.innerHeight * 0.85)}
+            width={window.innerWidth > 1024 ? 1400 : window.innerWidth - 48}
+            height={Math.min(1100, window.innerHeight * 1.1)}
           />
         </motion.div>
       )}

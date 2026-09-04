@@ -6,70 +6,14 @@ import {
   Github,
   X,
 } from 'lucide-react';
-
-interface Project {
-  id: string;
-  number: string;
-  name: string;
-  subtitle: string;
-  category: string;
-  year: string;
-  description: string;
-  image: string;
-  demo_url: string;
-  github_url: string;
-}
-
-const PROJECTS: Project[] = [
-  {
-    id: 'proj-01',
-    number: '01',
-    name: 'Neural Canvas',
-    subtitle: 'Real-time generative shaders',
-    category: 'WebGL / R3F / Shaders',
-    year: '2026',
-    description:
-      'A GPU-driven playground where fragment shaders react to pointer input in real time. Custom post-processing pipeline, instanced geometry, and a parametric control surface.',
-    image:
-      'https://images.unsplash.com/photo-1622737133809-d95047b9e673?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkYXJrJTIwYWJzdHJhY3QlMjAzZCUyMGdlb21ldHJ5JTIwcmVuZGVyfGVufDB8fHx8MTc4ODM2OTc5OXww&ixlib=rb-4.1.0&q=85',
-    demo_url: 'https://example.com/demo1',
-    github_url: 'https://github.com/example/demo1',
-  },
-  {
-    id: 'proj-02',
-    number: '02',
-    name: 'Synapse HQ',
-    subtitle: 'Distributed metrics dashboard',
-    category: 'React / FastAPI / Recharts',
-    year: '2025',
-    description:
-      'A monitoring surface for distributed services — streaming time-series, anomaly highlighting, and a keyboard-first command palette for operators.',
-    image:
-      'https://images.unsplash.com/photo-1510519138101-570d1dca3d66?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHxfHxtaW5pbWFsaXN0JTIwZGFyayUyMGFyY2hpdGVjdHVyZSUyMHdvcmtzcGFjZSUyMGNvZGV8ZW58MHx8fHwxNzg4MzY5Nzk1fDA&ixlib=rb-4.1.0&q=85',
-    demo_url: 'https://example.com/demo2',
-    github_url: 'https://github.com/example/demo2',
-  },
-  {
-    id: 'proj-03',
-    number: '03',
-    name: 'Kinetic Type Lab',
-    subtitle: 'Typographic design system',
-    category: 'Tailwind / Framer Motion',
-    year: '2025',
-    description:
-      'A motion-first type system: variable-font specimens, masked reveals, and scroll-linked choreography packaged as drop-in React components.',
-    image:
-      'https://images.unsplash.com/photo-1678366633407-7f49da199a42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHxfHxkYXJrJTIwYWJzdHJhY3QlMjAzZCUyMGdlb21ldHJ5JTIwcmVuZGVyfGVufDB8fHx8MTc4ODM2OTc5OXww&ixlib=rb-4.1.0&q=85',
-    demo_url: 'https://example.com/demo3',
-    github_url: 'https://github.com/example/demo3',
-  },
-];
+import { getProjects, type Project } from '@/projects';
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
+  const PROJECTS = getProjects();
 
   return (
-    <section id="projects" data-testid="projects-section" className="mx-auto max-w-[1600px] px-6 py-28 md:px-10 md:py-40">
+    <section id="projects" data-testid="projects-section" className="mx-auto max-w-[1000px] px-6 py-10 md:px-10 md:py-12">
       <motion.p
         className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500"
         initial={{ opacity: 0, y: 16 }}
