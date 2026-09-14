@@ -50,7 +50,7 @@ export default function Experience() {
             key={experience.id}
             data-testid={`experience-row-${experience.number}`}
             onClick={() => setActive(experience)}
-            className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-[#27272A] py-8 text-left transition-colors last:border-b hover:bg-white/[0.03] md:grid-cols-[auto_auto_1fr_auto_auto] md:gap-10 md:px-4"
+            className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-[#27272A] py-8 text-left transition-colors last:border-b hover:bg-white/[0.03] md:grid-cols-[auto_1fr_auto_auto] md:gap-10 md:px-4"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -58,13 +58,6 @@ export default function Experience() {
           >
             <span className="font-mono text-sm text-neutral-600">
               /<span>{experience.number}</span>
-            </span>
-            <span className="hidden h-16 w-24 overflow-hidden border border-[#27272A] md:block flex items-center justify-center">
-              <img
-                src={experience.logo}
-                alt={experience.company}
-                className="h-12 w-12 object-contain grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
-              />
             </span>
             <span>
               <span className="block font-display text-xl font-bold uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-2 md:text-3xl">
@@ -100,12 +93,7 @@ export default function Experience() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-[4/1] overflow-hidden border-b border-[#27272A] bg-neutral-900 flex items-center justify-center">
-                <img
-                  src={active.logo}
-                  alt={active.company}
-                  className="h-24 w-auto object-contain"
-                />
+              <div className="p-6 md:p-8 border-b border-[#27272A]">
                 <button
                   data-testid="experience-modal-close"
                   onClick={() => setActive(null)}
@@ -113,8 +101,6 @@ export default function Experience() {
                 >
                   <X className="h-4 w-4" />
                 </button>
-              </div>
-              <div className="p-6 md:p-8">
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
                   /{active.number} — {active.category} — {active.period}
                 </p>

@@ -49,7 +49,7 @@ export default function Projects() {
             key={project.id}
             data-testid={`project-row-${project.number}`}
             onClick={() => setActive(project)}
-            className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-[#27272A] py-8 text-left transition-colors last:border-b hover:bg-white/[0.03] md:grid-cols-[auto_auto_1fr_auto_auto] md:gap-10 md:px-4"
+            className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 border-t border-[#27272A] py-8 text-left transition-colors last:border-b hover:bg-white/[0.03] md:grid-cols-[auto_1fr_auto_auto] md:gap-10 md:px-4"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -57,13 +57,6 @@ export default function Projects() {
           >
             <span className="font-mono text-sm text-neutral-600">
               /<span>{project.number}</span>
-            </span>
-            <span className="hidden h-16 w-24 overflow-hidden border border-[#27272A] md:block">
-              <img
-                src={project.image}
-                alt={project.name}
-                className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
-              />
             </span>
             <span>
               <span className="block font-display text-xl font-bold uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-2 md:text-3xl">
@@ -99,12 +92,7 @@ export default function Projects() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-video overflow-hidden border-b border-[#27272A]">
-                <img
-                  src={active.image}
-                  alt={active.name}
-                  className="h-full w-full object-cover"
-                />
+              <div className="p-6 md:p-8 border-b border-[#27272A]">
                 <button
                   data-testid="project-modal-close"
                   onClick={() => setActive(null)}
@@ -112,8 +100,6 @@ export default function Projects() {
                 >
                   <X className="h-4 w-4" />
                 </button>
-              </div>
-              <div className="p-6 md:p-8">
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
                   /{active.number} — {active.category} — {active.year}
                 </p>
