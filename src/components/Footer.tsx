@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, MessageCircle, Download } from 'lucide-react';
 import { toast } from 'sonner';
 
 const SOCIALS = [
-  { label: 'GitHub', icon: Github, href: 'https://github.com', testid: 'social-github' },
-  { label: 'Twitter', icon: Twitter, href: 'https://twitter.com', testid: 'social-twitter' },
-  { label: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com', testid: 'social-linkedin' },
+  { label: 'GitHub', icon: Github, href: 'https://github.com/DevonYuan', testid: 'social-github' },
+  { label: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/devon-yuan-361575340/', testid: 'social-linkedin' },
+  { label: 'Discord', icon: MessageCircle, href: 'https://discord.com', testid: 'social-discord' },
 ];
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('hello@yourname.dev');
+      await navigator.clipboard.writeText('devon.yuan@outlook.com');
       toast.success('Email copied to clipboard');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -35,18 +35,6 @@ export default function Footer() {
         >
           03 — Contact
         </motion.p>
-        <motion.h2
-          className="mt-6 font-display text-[10vw] font-extrabold uppercase leading-[0.9] tracking-[-0.02em] md:text-[7vw]"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Let's build{' '}
-          <br />
-          something{' '}
-          <span className="font-serif normal-case italic text-neutral-400">iconic.</span>
-        </motion.h2>
         {/* Divider line */}
         <motion.div
           className="mt-8 w-16 h-px bg-neutral-700"
@@ -62,8 +50,16 @@ export default function Footer() {
             className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
           >
             <Mail className="h-4 w-4" />
-            {copied ? 'Copied!' : 'hello@yourname.dev'}
+            {copied ? 'Copied!' : 'devon.yuan@outlook.com'}
           </button>
+          <a
+            href="/resume.pdf"
+            download="Devon_Yuan_Resume.pdf"
+            className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
+          >
+            <Download className="h-4 w-4" />
+            Download Resume
+          </a>
           {SOCIALS.map((social) => (
             <a
               key={social.label}
