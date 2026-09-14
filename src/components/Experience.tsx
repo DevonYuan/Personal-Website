@@ -33,7 +33,7 @@ export default function Experience() {
       >
         Experience{' '}
         <span className="font-serif normal-case italic text-neutral-400">
-          2021 — Present
+          2026 — Present
         </span>
       </motion.h2>
       {/* Divider line */}

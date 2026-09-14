@@ -32,7 +32,7 @@ export default function Projects() {
       >
         Projects{' '}
         <span className="font-serif normal-case italic text-neutral-400">
-          2025 — 2026
+          2026 - Present
         </span>
       </motion.h2>
       {/* Divider line */}
