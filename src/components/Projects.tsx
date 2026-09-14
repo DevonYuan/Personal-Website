@@ -109,9 +109,11 @@ export default function Projects() {
                 <p className="mt-1 font-serif text-sm italic text-neutral-500">
                   {active.subtitle}
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-400">
-                  {active.description}
-                </p>
+                <div className="mt-4 text-sm leading-relaxed text-neutral-400 space-y-2">
+                  {active.description.split('\n').filter(Boolean).map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
                 <div className="mt-6 flex gap-3">
                   <a
                     data-testid="project-modal-demo-link"

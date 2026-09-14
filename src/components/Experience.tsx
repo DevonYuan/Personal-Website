@@ -120,9 +120,11 @@ export default function Experience() {
                     {active.period}
                   </span>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-400">
-                  {active.description}
-                </p>
+                <div className="mt-4 text-sm leading-relaxed text-neutral-400 space-y-2">
+                  {active.description.split('\n').filter(Boolean).map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
                 {active.website && (
                   <div className="mt-6">
                     <a
