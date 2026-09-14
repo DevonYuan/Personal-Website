@@ -6,8 +6,8 @@ subtitle: Producing 3D visualizations of physics problems.
 category: React / FastAPI / AI 
 year: "2026"
 demo_url: https://example.com/demo2
-github_url: https://github.com/example/demo2
-image: https://images.unsplash.com/photo-1510519138101-570d1dca3d66?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHxfHxtaW5pbWFsaXN0JTIwZGFyayUyMGFyY2hpdGVjdHVyZSUyMHdvcmtzcGFjZSUyMGNvZGV8ZW58MHx8fHwxNzg4MzY5Nzk1fDA&ixlib=rb-4.1.0&q=85
+github_url: https://github.com/DevonYuan/Visualize-Mechanics
+image: 
 ---
 
-A monitoring surface for distributed services — streaming time-series, anomaly highlighting, and a keyboard-first command palette for operators.
+A desktop application that transforms physics problem photos into interactive 3D animations with worked solutions. Built for high school mechanics (kinematics, forces, energy). Uses the NVIDIA NIM (No RPD, 40 RPM), with models chosen after several iterative refinements. 

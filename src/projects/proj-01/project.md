@@ -6,7 +6,7 @@ subtitle: Cloud sync across storage providers
 category: FastAPI / React / Cloud Sync
 year: "2026"
 demo_url: https://example.com/demo1
-github_url: https://github.com/DevonYuan/Visualize-Mechanics
+github_url: https://github.com/DevonYuan/Unified-Storage-Pooler
 image: https://images.unsplash.com/photo-1622737133809-d95047b9e673?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkYXJrJTIwYWJzdHJhY3QlMjAzZCUyMGdlb21ldHJ5JTIwcmVuZGVyfGVufDB8fHx8MTc4ODM2OTc5OXww&ixlib=rb-4.1.0&q=85
 ---
 
