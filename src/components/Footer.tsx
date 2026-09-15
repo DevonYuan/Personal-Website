@@ -74,7 +74,7 @@ export default function Footer() {
             {copied ? 'Copied!' : 'devon.yuan@outlook.com'}
           </button>
           <a
-            href="/resume.pdf"
+            href={`${import.meta.env.BASE_URL}resume.pdf`}
             download="Devon_Yuan_Resume.pdf"
             className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
           >
@@ -163,7 +163,7 @@ export default function Footer() {
           )}
         </AnimatePresence>
         <div className="mt-24 flex flex-wrap items-center justify-between gap-4 border-t border-[#27272A] pt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-600">
-          <span data-testid="footer-copyright">© 2026 Your Name — All rights reserved</span>
+          <span data-testid="footer-copyright">© 2026 Devon Yuan — All rights reserved</span>
           <span data-testid="footer-status" className="flex items-center gap-2">
             <span className="animate-blink inline-block h-1.5 w-1.5 rounded-full bg-[#2A9D8F]" />
             SYS.STATUS — All systems operational

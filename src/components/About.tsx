@@ -18,15 +18,19 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   },
   {
     title: 'Frameworks',
-    items: ['React', 'Next.js', 'FastAPI', 'Tailwind', 'Three.js', 'chi', 'Electron'],
+    items: ['React', 'Next.js', 'FastAPI', 'Tailwind', 'Three.js', 'chi', 'Electron', 'Playwright'],
   },
   {
     title: 'Developer Tools & OS',
-    items: ['Linux', 'MacOS', 'Windows', 'Git', 'Docker','VS Code'],
+    items: ['Linux', 'MacOS', 'Windows', 'Git', 'Docker', 'VS Code'],
   },
   {
     title: 'Cloud', 
-    items: ['GCP', 'Azure', 'Render', 'Vercel', 'Supabase'],
+    items: ['GCP', 'Azure', 'AWS', 'Render', 'Vercel', 'Supabase'],
+  },
+  {
+    title: 'AI',
+    items: ['Prompt Engineering', 'APIs', 'Agentic Workflows', 'Copilot', 'Claude Code', 'Cursor', 'Devin', 'Ollama', 'LM Studio'],
   },
 ];
 

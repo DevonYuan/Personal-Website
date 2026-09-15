@@ -32,6 +32,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   Frameworks: '#457B9D',
   'Developer Tools & OS': '#2A9D8F',
   Cloud: '#7C3AED',
+  AI: '#F97316',
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -40,6 +41,7 @@ const CATEGORY_ICONS: Record<string, string> = {
   Frameworks: '',
   'Developer Tools & OS': '',
   Cloud: '',
+  AI: '',
 };
 
 export function SkillGraph({
