@@ -73,14 +73,24 @@ export default function Footer() {
             <Mail className="h-4 w-4" />
             {copied ? 'Copied!' : 'devon.yuan@outlook.com'}
           </button>
-          <a
-            href={`${import.meta.env.BASE_URL}resume.pdf`}
-            download="Devon_Yuan_Resume.pdf"
-            className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
-          >
-            <Download className="h-4 w-4" />
-            Download Resume
-          </a>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={`${import.meta.env.BASE_URL}DevonYuan-Full-Stack-Developer-Resume-1Page.pdf`}
+              download="DevonYuan-Full-Stack-Developer-Resume-1Page.pdf"
+              className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
+            >
+              <Download className="h-4 w-4" />
+              Download Resume - 1 Page
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}DevonYuan-Full-Stack-Developer-Resume-Full.pdf`}
+              download="DevonYuan-Full-Stack-Developer-Resume-Full.pdf"
+              className="flex items-center gap-3 border border-neutral-600 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
+            >
+              <Download className="h-4 w-4" />
+              Download Resume - Full
+            </a>
+          </div>
           {SOCIALS.map((social) => (
             <a
               key={social.label}
