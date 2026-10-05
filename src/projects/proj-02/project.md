@@ -1,6 +1,6 @@
 ---
 id: proj-02
-number: "02"
+number: "03"
 name: Visualize Mechanics 
 subtitle: Producing 3D visualizations of physics problems. 
 category: React / FastAPI / AI 

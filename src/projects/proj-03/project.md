@@ -1,6 +1,6 @@
 ---
 id: proj-03
-number: "03"
+number: "04"
 name: CourseFlow 
 subtitle: Calendar sync and note-taking 
 category: Electron / TypeScript / React / SQLite 

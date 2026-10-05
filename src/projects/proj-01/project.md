@@ -1,6 +1,6 @@
 ---
 id: proj-01
-number: "01"
+number: "02"
 name: Unified Storage Pooler
 subtitle: Cloud sync across storage providers 
 category: FastAPI / React / Cloud Sync
