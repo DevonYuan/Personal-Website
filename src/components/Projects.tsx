@@ -115,16 +115,18 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="mt-6 flex gap-3">
-                  <a
-                    data-testid="project-modal-demo-link"
-                    href={active.demo_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 border border-neutral-600 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-black"
-                  >
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    Live Demo
-                  </a>
+                  {active.demo_url && (
+                    <a
+                      data-testid="project-modal-demo-link"
+                      href={active.demo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 border border-neutral-600 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors hover:bg-white hover:text-black"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      Live Demo
+                    </a>
+                  )}
                   <a
                     data-testid="project-modal-github-link"
                     href={active.github_url}

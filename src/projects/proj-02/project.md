@@ -5,7 +5,6 @@ name: Visualize Mechanics
 subtitle: Producing 3D visualizations of physics problems. 
 category: React / FastAPI / AI 
 year: "2026"
-demo_url: https://example.com/demo2
 github_url: https://github.com/DevonYuan/Visualize-Mechanics
 image: 
 ---

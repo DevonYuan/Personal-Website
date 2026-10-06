@@ -7,7 +7,7 @@ export interface Project {
   year: string;
   description: string;
   image: string;
-  demo_url: string;
+  demo_url?: string;
   github_url: string;
 }
 
