@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -10 84 84">
+<style>.s{stroke:#000}.f{fill:#000}@media (prefers-color-scheme:dark){.s{stroke:#fff}.f{fill:#fff}}</style>
+<defs>
+<mask id="m" maskUnits="userSpaceOnUse" x="-20" y="-20" width="104" height="104">
+<rect x="-20" y="-20" width="104" height="104" fill="#fff"/>
+<path d="M37 5L21 33H31L27 59L45 28H35Z" fill="#000" stroke="#000" stroke-width="7" stroke-linejoin="round"/>
+</mask>
+</defs>
+<g transform="translate(48 32) scale(1.50) translate(-32 -32)">
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" class="s" stroke-width="4" mask="url(#m)">
+<path d="M32 8L52.8 20V44L32 56L11.2 44V20Z"/>
+<path d="M11.2 20L32 32L52.8 20M32 32V56"/>
+</g>
+<path d="M37 5L21 33H31L27 59L45 28H35Z" class="f" stroke-linejoin="round"/>
+</g>
+</svg>
