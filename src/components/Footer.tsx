@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, MessageCircle, Download, X } from 'lucide-react';
+import { Github, Linkedin, Mail, MessageCircle, Instagram, Download, X, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 
 const SOCIALS = [
@@ -11,7 +11,7 @@ const SOCIALS = [
 export default function Footer() {
   const [copied, setCopied] = useState(false);
   const [showDiscord, setShowDiscord] = useState(false);
-  const [discordCopied, setDiscordCopied] = useState(false);
+  const [socialCopied, setSocialCopied] = useState(false);
 
   const copyEmail = async () => {
     try {
@@ -24,14 +24,14 @@ export default function Footer() {
     }
   };
 
-  const copyDiscord = async () => {
+  const copySocial = async () => {
     try {
       await navigator.clipboard.writeText('devon7021o_o');
-      toast.success('Discord tag copied to clipboard');
-      setDiscordCopied(true);
-      setTimeout(() => setDiscordCopied(false), 2000);
+      toast.success('Username copied to clipboard');
+      setSocialCopied(true);
+      setTimeout(() => setSocialCopied(false), 2000);
     } catch {
-      toast.error('Could not copy Discord tag');
+      toast.error('Could not copy username');
     }
   };
 
@@ -107,10 +107,10 @@ export default function Footer() {
           <button
             data-testid="footer-discord-btn"
             onClick={() => setShowDiscord(true)}
-            className="border border-neutral-700 p-3 text-neutral-400 transition-colors hover:border-white hover:text-white"
-            aria-label="Discord"
+            className="border border-neutral-700 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] transition-colors hover:bg-white hover:text-black"
+            aria-label="Discord and Instagram"
           >
-            <MessageCircle className="h-4 w-4" />
+            discord/instagram
           </button>
         </div>
         <AnimatePresence>
@@ -138,7 +138,7 @@ export default function Footer() {
               >
                 <div className="flex items-center justify-between border-b border-[#27272A] px-4 py-3">
                   <h3 id="discord-modal-title" className="font-display text-lg font-bold uppercase tracking-tight">
-                    Discord
+                    Contact
                   </h3>
                   <button
                     onClick={() => setShowDiscord(false)}
@@ -149,23 +149,29 @@ export default function Footer() {
                   </button>
                 </div>
                 <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500 mb-2">
-                    Tag
-                  </p>
+                  <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500 mb-2">
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    <span>Discord</span>
+                    <span className="text-neutral-600">/</span>
+                    <Instagram className="h-3.5 w-3.5" />
+                    <span>Instagram</span>
+                  </div>
                   <button
-                    onClick={copyDiscord}
+                    onClick={copySocial}
                     className="font-mono text-sm text-neutral-200 break-all hover:text-[#2A9D8F] transition-colors flex items-center gap-2"
-                    aria-label={discordCopied ? 'Copied!' : 'Copy Discord tag'}
+                    aria-label={socialCopied ? 'Copied!' : 'Copy username'}
                   >
                     devon7021o_o
-                    {discordCopied && (
+                    {socialCopied ? (
                       <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#2A9D8F]">
                         Copied!
                       </span>
+                    ) : (
+                      <Copy className="h-4 w-4 text-neutral-500 hover:text-[#2A9D8F]" />
                     )}
                   </button>
                   <p className="mt-3 text-xs text-neutral-500">
-                    Click to copy
+                    Click to copy (same username on both platforms)
                   </p>
                 </div>
               </motion.div>
