@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -12,12 +12,14 @@ import AboutSection from './components/AboutSection';
 
 function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.09,
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
     (window as any).__lenis = lenis;
     let raf: number;
     const loop = (time: number) => {
@@ -28,9 +30,20 @@ function App() {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      lenisRef.current = null;
       (window as any).__lenis = null;
     };
   }, []);
+
+  // The About overlay has its own scroll container, so pause Lenis while it is open.
+  useEffect(() => {
+    if (!lenisRef.current) return;
+    if (isAboutOpen) {
+      lenisRef.current.stop();
+    } else {
+      lenisRef.current.start();
+    }
+  }, [isAboutOpen]);
 
   return (
     <div className="min-h-screen bg-[#080808] font-sans text-[#F5F5F7] overflow-x-hidden">
@@ -51,7 +64,7 @@ function App() {
         <Footer />
       </motion.div>
 
-      {isAboutOpen && <AboutSection />}
+      {isAboutOpen && <AboutSection onClose={() => setIsAboutOpen(false)} />}
 
       <ScrollProgressBar />
     </div>

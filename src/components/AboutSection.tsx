@@ -1,11 +1,54 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function AboutSection() {
+interface BeyondCodeEntry {
+  number: string;
+  title: string;
+  meta: string;
+  body: string;
+}
+
+const BEYOND_CODE: BeyondCodeEntry[] = [
+  {
+    number: '01',
+    title: 'Speedcubing',
+    meta: 'Puzzle / Sub-10',
+    body:
+      "I've been speedcubing since I was a child, and currently average sub-10. I did it casually, up until the last year of high school, when I decided that I seriously wanted to improve. That pushed me to finally memorize full OLL and PLL, which I had been putting off until then. I also worked on my look-ahead, allowing me to achieve more fluid transitions between my F2L pairs. Now, I'm working on my execution and fingertricks to achieve higher TPS.",
+  },
+  {
+    number: '02',
+    title: 'Video Gaming',
+    meta: 'Fighting / Master',
+    body:
+      "I have been gaming for as long as I can remember. A couple of my favourite games and series include MarioKart Wii, Need for Speed, Assassin's Creed, Sonic the Hedgehog, Batman Arkham, and Dying Light. After finishing IB exams in high school, I also picked up fighting games. I played my father's copy of Street Fighter 4 and 5, and later began playing Street Fighter 6, where I am a master ranked Ken main. I have mained Ken in every Street Fighter game that I play, because I like the flaming visual effects and aggressive playstyle. In Street Fighter 3: Third Strike, I also dabble with Ryu and Akuma as my off-mains.",
+  },
+  {
+    number: '03',
+    title: 'Running',
+    meta: '5K / 19:15',
+    body:
+      "I began running solely for the exercise, but I fell in love with it because I liked the idea of pushing myself to become as fast as possible. Just like speedcubing, and in some of the games I play, I like the thrill of pushing myself to achieve high speeds, whether it's turning a cube faster than the eye can process, or completing a Sonic level in the shortest time possible. Naturally, running followed. I was a co-captain for the cross country team in high school, and I still run for the love of it. Current 5k time is just under 20 minutes, record is 19:15.",
+  },
+  {
+    number: '04',
+    title: 'Cars',
+    meta: 'RX7 / FD3S',
+    body:
+      "I'm a huge car enthusiast, and my favourite car of all time is the Mazda RX7 FD3S. My first exposure to cars was the Cars movie, then playing Need for Speed, and later the Fast and Furious franchise. That's the RX7 up there! It was captured in photo mode from a drifting game called FR Legends, where I built my dream car in game, an RX7 with an RE Amemiya body kit. I included aspects of my father's 2001 Honda Prelude in real life, namely the white exterior, gold painted rims, and carbon fiber hood.",
+  },
+];
+
+interface AboutSectionProps {
+  onClose?: () => void;
+}
+
+export default function AboutSection({ onClose }: AboutSectionProps) {
   return (
     <motion.section
       id="about-section-full"
-      className="fixed inset-0 z-40 bg-[#080808] flex items-center justify-center overflow-hidden"
+      data-lenis-prevent=""
+      className="fixed inset-0 z-40 overflow-y-auto overflow-x-hidden bg-[#080808]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -13,6 +56,9 @@ export default function AboutSection() {
     >
       {/* Blueprint grid background - matching Hero */}
       <BlueprintGrid />
+
+      {/* ---------- About Me hero ---------- */}
+      <div className="relative flex h-screen min-h-[640px] w-full items-center justify-center overflow-hidden">
 
       {/* RX7 Image - circular cutout, centered, behind the wordmark */}
       <motion.div
@@ -129,7 +175,7 @@ export default function AboutSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
         >
-          Close to return ↓
+          Scroll to explore ↓
         </motion.span>
       </div>
 
@@ -152,6 +198,131 @@ export default function AboutSection() {
       <motion.div className="absolute bottom-[38%] right-[8%] z-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
         ✦
       </motion.div>
+      </div>
+
+      {/* ---------- 01 - Profile ---------- */}
+      <div className="relative z-10 border-t border-[#27272A] bg-[#080808]/60">
+        <div className="mx-auto max-w-[1000px] px-6 py-14 md:px-10 md:py-20">
+          <motion.p
+            data-testid="about-profile-callout"
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7 }}
+          >
+            01 — Profile
+          </motion.p>
+          <motion.h2
+            className="mt-4 font-display text-3xl font-extrabold uppercase tracking-tight sm:text-4xl lg:text-5xl"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            Computer Science Student{' '}
+            <span className="font-serif normal-case italic text-neutral-400">@ UBC</span>
+          </motion.h2>
+          {/* Divider line */}
+          <motion.div
+            className="mt-8 h-px w-16 bg-neutral-700"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+          <motion.p
+            className="mt-10 max-w-[68ch] text-base leading-relaxed text-neutral-400 md:text-lg"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+          >
+            I&apos;m a Computer Science student at the{' '}
+            <span className="text-neutral-200">University of British Columbia</span>, currently
+            seeking an internship for winter or summer 2027. I don&apos;t build projects solely for
+            the purpose of learning. While learning is important, the bigger reason is that I want
+            to create tools that are actually useful, for myself or for others. I&apos;m currently
+            using a MacBook M5 Pro, which I bought after saving up from my summer job as a tutor!
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ---------- 03 - Beyond Code ---------- */}
+      <div className="relative z-10 border-t border-[#27272A] bg-[#080808]/60">
+        <div className="mx-auto max-w-[1000px] px-6 py-16 md:px-10 md:py-24">
+          <motion.p
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-500"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7 }}
+          >
+            03 — Beyond Code
+          </motion.p>
+          <motion.h2
+            className="mt-4 font-display text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            Beyond <span className="font-serif normal-case italic text-neutral-400">code</span>
+          </motion.h2>
+          {/* Divider line */}
+          <motion.div
+            className="mt-8 h-px w-16 bg-neutral-700"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+
+          <div className="mt-16 md:mt-24">
+            {BEYOND_CODE.map((entry, i) => (
+              <motion.article
+                key={entry.number}
+                data-testid={`beyond-code-${entry.number}`}
+                className="grid gap-4 border-t border-[#27272A] py-8 last:border-b md:grid-cols-[auto_1fr_auto] md:gap-10 md:px-4"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+              >
+                <span className="font-mono text-sm text-neutral-600">/{entry.number}</span>
+                <div>
+                  <h3 className="font-display text-xl font-bold uppercase tracking-tight md:text-3xl">
+                    {entry.title}
+                  </h3>
+                  <p className="mt-3 max-w-[62ch] text-sm leading-relaxed text-neutral-400">
+                    {entry.body}
+                  </p>
+                </div>
+                <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500 md:block">
+                  {entry.meta}
+                </span>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+
+        <div className="border-t border-[#27272A]">
+          <div className="mx-auto flex max-w-[1000px] flex-col items-start justify-between gap-4 px-6 py-8 md:flex-row md:items-center md:px-10">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+              End of about
+            </span>
+            {onClose && (
+              <button
+                data-testid="about-footer-return"
+                onClick={onClose}
+                className="border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black"
+              >
+                Return to Home
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
     </motion.section>
   );
 }
