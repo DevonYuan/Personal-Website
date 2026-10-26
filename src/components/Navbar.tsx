@@ -55,6 +55,13 @@ export default function Navbar() {
           >
             Connect
           </button>
+          <button
+            data-testid="nav-cta-about"
+            onClick={() => handleScroll('#about')}
+            className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
+          >
+            ABOUT
+          </button>
         </div>
       </nav>
     </header>
