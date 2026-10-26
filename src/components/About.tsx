@@ -16,7 +16,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Languages',
     items: ['Go', 'Python', 'TypeScript', 'JavaScript', 'C++', 'Java'],
   },
-  {
+  {     
     title: 'Frameworks',
     items: ['React', 'Next.js', 'FastAPI', 'Tailwind', 'Three.js', 'chi', 'Electron', 'Playwright'],
   },
