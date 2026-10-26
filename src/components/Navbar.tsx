@@ -6,6 +6,11 @@ interface NavLink {
   testid: string;
 }
 
+interface NavbarProps {
+  isAboutOpen: boolean;
+  onToggleAbout: (open: boolean) => void;
+}
+
 const LINKS: NavLink[] = [
   { label: 'Home', id: '#hero', testid: 'nav-link-home' },
   { label: 'Skills', id: '#about', testid: 'nav-link-skills' },
@@ -21,7 +26,7 @@ export const scrollToSection = (id: string) => {
   }
 };
 
-export default function Navbar() {
+export default function Navbar({ isAboutOpen, onToggleAbout }: NavbarProps) {
   const handleScroll = useCallback((id: string) => {
     scrollToSection(id);
   }, []);
@@ -37,31 +42,43 @@ export default function Navbar() {
           DY — DEVON7021
         </button>
         <div className="flex items-center gap-6 md:gap-10">
-          {LINKS.map((link) => (
+          {!isAboutOpen ? (
+            <>
+              {LINKS.map((link) => (
+                <button
+                  key={link.id}
+                  data-testid={link.testid}
+                  onClick={() => handleScroll(link.id)}
+                  className="group relative font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-400 transition-colors hover:text-white"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-white transition-[width] duration-300 group-hover:w-full" />
+                </button>
+              ))}
+              <button
+                data-testid="nav-cta-connect"
+                onClick={() => handleScroll('#footer')}
+                className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
+              >
+                Connect
+              </button>
+              <button
+                data-testid="nav-cta-about"
+                onClick={() => onToggleAbout(true)}
+                className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
+              >
+                ABOUT
+              </button>
+            </>
+          ) : (
             <button
-              key={link.id}
-              data-testid={link.testid}
-              onClick={() => handleScroll(link.id)}
-              className="group relative font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-400 transition-colors hover:text-white"
+              data-testid="nav-cta-return"
+              onClick={() => onToggleAbout(false)}
+              className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-white transition-[width] duration-300 group-hover:w-full" />
+              Return to Home
             </button>
-          ))}
-          <button
-            data-testid="nav-cta-connect"
-            onClick={() => handleScroll('#footer')}
-            className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
-          >
-            Connect
-          </button>
-          <button
-            data-testid="nav-cta-about"
-            onClick={() => handleScroll('#about')}
-            className="hidden border border-neutral-700 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-neutral-200 transition-colors hover:border-white hover:bg-white hover:text-black md:block"
-          >
-            ABOUT
-          </button>
+          )}
         </div>
       </nav>
     </header>

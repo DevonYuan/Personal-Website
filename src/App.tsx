@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
+import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,8 +8,11 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import ScrollProgressBar from './components/ScrollProgressBar';
+import AboutSection from './components/AboutSection';
 
 function App() {
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.09,
@@ -29,16 +33,26 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#080808] font-sans text-[#F5F5F7]">
+    <div className="min-h-screen bg-[#080808] font-sans text-[#F5F5F7] overflow-x-hidden">
       <div className="noise-overlay pointer-events-none fixed inset-0 z-[90] opacity-[0.04]" />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-      </main>
-      <Footer />
+      <Navbar isAboutOpen={isAboutOpen} onToggleAbout={setIsAboutOpen} />
+      
+      <motion.div
+        className="w-full"
+        animate={{ x: isAboutOpen ? '-100%' : 0 }}
+        transition={{ type: 'spring', stiffness: 100, damping: 30 }}
+      >
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+        </main>
+        <Footer />
+      </motion.div>
+
+      {isAboutOpen && <AboutSection />}
+
       <ScrollProgressBar />
     </div>
   );
