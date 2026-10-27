@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About me · Devon Yuan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root{--bg:#000;--ink:#f5f5f7;--dim:#8a8d92;--line:#f5f5f7;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:inherit}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);overflow:hidden}
+body{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.3em}
+header,footer,.hud{position:absolute;left:0;right:0;display:flex;justify-content:space-between;padding:0 3vw;color:var(--dim);z-index:3}
+header{top:0;height:56px;align-items:center;border-bottom:1px solid #1c1c1e;color:var(--ink)}
+header a{border:1px solid #444;padding:10px 16px;color:var(--ink);text-decoration:none}
+.hud{top:96px}
+footer{bottom:24px}
+.stage{position:absolute;inset:0;display:grid;place-items:center}
+svg{width:min(112vw,118vh);height:auto;max-height:100%;-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.ln path{fill:none;stroke:var(--line);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s cubic-bezier(.6,0,.2,1) forwards;animation-delay:calc(var(--i)*9ms)}
+.base{opacity:.4}.hot path{stroke-width:2.2}
+@keyframes draw{to{stroke-dashoffset:0}}
+.glow{filter:drop-shadow(0 0 30px rgba(80,255,190,.25))}
+h1{position:absolute;margin:0;font:800 clamp(64px,14vw,230px)/.85 Syne,"Arial Black",sans-serif;letter-spacing:-.01em;z-index:2;pointer-events:none}
+h1.a{left:5vw;top:15vh}h1.b{right:4vw;bottom:14vh}
+h1 span{position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px #2a2a2c;transform:translate(14px,14px)}
+@media (prefers-reduced-motion:reduce){.ln path{animation:none;stroke-dashoffset:0}}
+@media (max-width:700px){.hud span:last-child,header a{display:none}}
+</style></head><body>
+<header><span>DY — DEVON7021</span><a href="#">RETURN TO HOME</a></header>
+<div class="hud"><span>PORTFOLIO / V.2026</span><span>49.2748°N — 122.7987°W</span></div>
+<h1 class="a">ABOUT<span aria-hidden="true">ABOUT</span></h1>
+<h1 class="b">ME<span aria-hidden="true">ME</span></h1>
+<div class="stage">
+<svg viewBox="0 0 1024 977" role="img" aria-label="Line drawing of a white Mazda RX-7 drifting, with a full-colour circle of the same scene under northern lights">
+<defs>
+<clipPath id="orb"><circle id="orbc" cx="500" cy="560" r="0"/></clipPath>
+<clipPath id="cur"><circle id="curc" cx="-999" cy="-999" r="130"/></clipPath>
+<radialGradient id="rim"><stop offset=".96" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#7dffd0" stop-opacity=".5"/></radialGradient>
+</defs>
+<g class="ln base">%%PATHS%%</g>
+<g class="ln hot" clip-path="url(#cur)">%%PATHS%%</g>
+<g class="glow"><g clip-path="url(#orb)"><image href="%%IMG%%" width="1024" height="977"/></g></g>
+<circle id="rimc" cx="500" cy="560" r="0" fill="none" stroke="#9fe9d2" stroke-opacity=".35"/>
+</svg></div>
+<footer><span>● ABOUT ME</span><span>SCROLL TO EXPLORE ↓</span></footer>
+<script>
+const orb=document.getElementById('orbc'),rim=document.getElementById('rimc'),cur=document.getElementById('curc'),svg=document.querySelector('svg');
+const R=330,still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const set=r=>{orb.setAttribute('r',r);rim.setAttribute('r',r)};
+if(still)set(R);else{const t0=performance.now()+1900;(function f(t){const k=Math.min(Math.max((t-t0)/1400,0),1),e=1-Math.pow(1-k,4);set(R*e);if(k<1)requestAnimationFrame(f)})(0)}
+addEventListener('pointermove',ev=>{const b=svg.getBoundingClientRect(),s=1024/b.width;cur.setAttribute('cx',(ev.clientX-b.left)*s);cur.setAttribute('cy',(ev.clientY-b.top)*s)});
+</script></body></html>
